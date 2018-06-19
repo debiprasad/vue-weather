@@ -52,4 +52,8 @@ export default {
   margin: 20px auto 40px;
   width: 300px;
 }
+.weather h1, .weather h2, .weather h3 {
+  color: #2c3e50;
+  text-decoration: none;
+}
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div v-if="woeid">
-    <Weather :woeid="woeid"/>
+    <router-link :to="'/weather/' + woeid">
+      <Weather :woeid="woeid"/>
+    </router-link>
   </div>
 </template>
 
