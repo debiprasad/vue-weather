@@ -1,7 +1,7 @@
 <template>
-  <div class="weather">
-    <h1>{{ city }}</h1>
-    <div v-if="temperature">
+  <div v-if="temperature">
+    <div class="weather">
+      <h1>{{ city }}</h1>
       <h2>{{ temperature }}</h2>
       <h3>Max: {{ maxtemp }}</h3>
       <h3>Min: {{ mintemp }}</h3>
@@ -16,11 +16,11 @@ import axios from 'axios';
 export default {
   name: 'Weather',
   props: {
-    city: '',
     woeid: null
   },
   data: function () {
     return {
+      city: '',
       temperature: null,
       maxtemp: null,
       mintemp: null,
@@ -34,6 +34,7 @@ export default {
     getWeather: function () {
       axios.get('https://metaweather.dev/weather.php?command=location&woeid=' + this.woeid)
         .then(response => {
+          this.city = response.data.title;
           this.temperature = response.data.consolidated_weather[0].the_temp;
           this.maxtemp = response.data.consolidated_weather[0].max_temp;
           this.mintemp = response.data.consolidated_weather[0].min_temp;

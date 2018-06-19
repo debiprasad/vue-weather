@@ -1,6 +1,6 @@
 <template>
   <div v-if="woeid">
-    <Weather :city="city" :woeid="woeid"/>
+    <Weather :woeid="woeid"/>
   </div>
 </template>
 
