@@ -2,6 +2,9 @@
   <div v-if="temperature">
     <div class="weather">
       <h1>{{ city }}</h1>
+      <div v-if="$route.params.woeid">
+        <h2>Today</h2>
+      </div>
       <h2>{{ Math.round(temperature) }}</h2>
       <h3>Max: {{ Math.round(maxtemp) }}</h3>
       <h3>Min: {{ Math.round(mintemp) }}</h3>
@@ -9,6 +12,7 @@
       <div v-if="$route.params.woeid">
         <div v-for="weather in consolidatedWeather">
           <hr>
+          <h2>{{ moment(weather.applicable_date).format("ddd") }}</h2>
           <h2>{{ Math.round(weather.the_temp) }}</h2>
           <h3>Max: {{ Math.round(weather.max_temp) }}</h3>
           <h3>Min: {{ Math.round(weather.min_temp) }}</h3>
@@ -22,6 +26,8 @@
 <script>
 import axios from 'axios';
 
+var moment = require('moment');
+
 export default {
   name: 'Weather',
   props: {
@@ -34,7 +40,8 @@ export default {
       maxtemp: null,
       mintemp: null,
       weathericon: null,
-      consolidatedWeather: []
+      consolidatedWeather: [],
+      moment: moment
     }
   },
   mounted: function () {
