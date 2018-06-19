@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <img src="../assets/logo.png">
+    <WeatherSearch/>
     <hr>
     <div v-for="city in cities">
       <WeatherOfCity :city="city"/>
@@ -11,11 +12,13 @@
 <script>
 // @ is an alias to /src
 import WeatherOfCity from '@/components/WeatherOfCity.vue'
+import WeatherSearch from '@/components/WeatherSearch.vue'
 
 export default {
   name: 'home',
   components: {
-    WeatherOfCity
+    WeatherOfCity,
+    WeatherSearch
   },
   data: function () {
     return {
