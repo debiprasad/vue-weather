@@ -2,16 +2,16 @@
   <div v-if="temperature">
     <div class="weather">
       <h1>{{ city }}</h1>
-      <h2>{{ temperature }}</h2>
-      <h3>Max: {{ maxtemp }}</h3>
-      <h3>Min: {{ mintemp }}</h3>
+      <h2>{{ Math.round(temperature) }}</h2>
+      <h3>Max: {{ Math.round(maxtemp) }}</h3>
+      <h3>Min: {{ Math.round(mintemp) }}</h3>
       <img :src="weathericon" width="100">
       <div v-if="$route.params.woeid">
         <div v-for="weather in consolidatedWeather">
           <hr>
-          <h2>{{ weather.the_temp }}</h2>
-          <h3>Max: {{ weather.max_temp }}</h3>
-          <h3>Min: {{ weather.min_temp }}</h3>
+          <h2>{{ Math.round(weather.the_temp) }}</h2>
+          <h3>Max: {{ Math.round(weather.max_temp) }}</h3>
+          <h3>Min: {{ Math.round(weather.min_temp) }}</h3>
           <img :src="'https://www.metaweather.com//static/img/weather/' + weather.weather_state_abbr + '.svg'" width="100">
         </div>
       </div>
