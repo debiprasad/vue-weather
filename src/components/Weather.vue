@@ -16,31 +16,23 @@ import axios from 'axios';
 export default {
   name: 'Weather',
   props: {
-    city: String
+    city: '',
+    woeid: null
   },
   data: function () {
     return {
       temperature: null,
       maxtemp: null,
       mintemp: null,
-      weathericon: null,
-      woeid: null
+      weathericon: null
     }
   },
   mounted: function () {
-    this.getWoeid();
+    this.getWeather();
   },
   methods: {
-    getWoeid: function () {
-      axios.get('https://metaweather.dev/weather.php?command=search&keyword=' + this.city, { crossdomain: true })
-        .then(response => {
-          this.woeid = response.data[0].woeid;
-          this.getWeather();
-        });
-    },
-
     getWeather: function () {
-      axios.get('https://metaweather.dev/weather.php?command=location&woeid=' + this.woeid, { crossdomain: true })
+      axios.get('https://metaweather.dev/weather.php?command=location&woeid=' + this.woeid)
         .then(response => {
           this.temperature = response.data.consolidated_weather[0].the_temp;
           this.maxtemp = response.data.consolidated_weather[0].max_temp;

@@ -3,24 +3,24 @@
     <img src="../assets/logo.png">
     <hr>
     <div v-for="city in cities">
-    	<Weather :city="city"/>
+      <WeatherOfCity :city="city"/>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Weather from '@/components/Weather.vue'
+import WeatherOfCity from '@/components/WeatherOfCity.vue'
 
 export default {
   name: 'home',
   components: {
-    Weather
+    WeatherOfCity
   },
   data: function () {
-  	return {
-  		cities: ['Istanbul', 'Berlin', 'London', 'Helsinki', 'Dublin', 'Vancouver']
-  	}
+    return {
+      cities: ['Istanbul', 'Berlin', 'London', 'Helsinki', 'Dublin', 'Vancouver'],
+    }
   }
 }
 </script>
