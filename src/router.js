@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import About from './views/About.vue'
+import Search from './views/Search.vue'
+import Details from './views/Details.vue'
 
 Vue.use(Router)
 
@@ -13,9 +14,14 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      component: About
+      path: '/search/:keyword',
+      name: 'search',
+      component: Search
+    },
+    {
+      path: '/weather/:woeid',
+      name: 'details',
+      component: Details
     }
   ]
 })

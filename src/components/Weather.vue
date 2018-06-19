@@ -1,0 +1,53 @@
+<template>
+  <div class="weather">
+    <h1>{{ city }}</h1>
+    <div v-if="temperature">
+      <h2>{{ temperature }}</h2>
+      <h3>Max: {{ maxtemp }}</h3>
+      <h3>Min: {{ mintemp }}</h3>
+      <img :src="weathericon" width="100">
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  name: 'Weather',
+  props: {
+    city: String
+  },
+  data: function () {
+    return {
+      temperature: null,
+      maxtemp: null,
+      mintemp: null,
+      weathericon: null,
+      woeid: null
+    }
+  },
+  mounted: function () {
+    this.getWoeid();
+  },
+  methods: {
+    getWoeid: function () {
+      axios.get('https://metaweather.dev/weather.php?command=search&keyword=' + this.city, { crossdomain: true })
+        .then(response => {
+          this.woeid = response.data[0].woeid;
+          this.getWeather();
+        });
+    },
+
+    getWeather: function () {
+      axios.get('https://metaweather.dev/weather.php?command=location&woeid=' + this.woeid, { crossdomain: true })
+        .then(response => {
+          this.temperature = response.data.consolidated_weather[0].the_temp;
+          this.maxtemp = response.data.consolidated_weather[0].max_temp;
+          this.mintemp = response.data.consolidated_weather[0].min_temp;
+          this.weathericon = 'https://www.metaweather.com//static/img/weather/' + response.data.consolidated_weather[0].weather_state_abbr + '.svg';
+        });        
+    }
+  }
+}
+</script>
