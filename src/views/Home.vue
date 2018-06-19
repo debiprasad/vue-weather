@@ -2,7 +2,9 @@
   <div class="home">
     <img src="../assets/logo.png">
     <hr>
-    <Weather city="Istanbul"/>
+    <div v-for="city in cities">
+    	<Weather :city="city"/>
+    </div>
   </div>
 </template>
 
@@ -14,6 +16,11 @@ export default {
   name: 'home',
   components: {
     Weather
+  },
+  data: function () {
+  	return {
+  		cities: ['Istanbul', 'Berlin', 'London', 'Helsinki', 'Dublin', 'Vancouver']
+  	}
   }
 }
 </script>

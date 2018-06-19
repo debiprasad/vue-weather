@@ -51,3 +51,12 @@ export default {
   }
 }
 </script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.weather {
+  border: 1px solid #333333;
+  margin: 20px auto 40px;
+  width: 300px;
+}
+</style>
