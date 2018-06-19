@@ -6,6 +6,15 @@
       <h3>Max: {{ maxtemp }}</h3>
       <h3>Min: {{ mintemp }}</h3>
       <img :src="weathericon" width="100">
+      <div v-if="$route.params.woeid">
+        <div v-for="weather in consolidatedWeather">
+          <hr>
+          <h2>{{ weather.the_temp }}</h2>
+          <h3>Max: {{ weather.max_temp }}</h3>
+          <h3>Min: {{ weather.min_temp }}</h3>
+          <img :src="'https://www.metaweather.com//static/img/weather/' + weather.weather_state_abbr + '.svg'" width="100">
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -24,7 +33,8 @@ export default {
       temperature: null,
       maxtemp: null,
       mintemp: null,
-      weathericon: null
+      weathericon: null,
+      consolidatedWeather: []
     }
   },
   mounted: function () {
@@ -39,6 +49,9 @@ export default {
           this.maxtemp = response.data.consolidated_weather[0].max_temp;
           this.mintemp = response.data.consolidated_weather[0].min_temp;
           this.weathericon = 'https://www.metaweather.com//static/img/weather/' + response.data.consolidated_weather[0].weather_state_abbr + '.svg';
+
+          this.consolidatedWeather = response.data.consolidated_weather;
+          this.consolidatedWeather.shift();
         });        
     }
   }
@@ -55,5 +68,8 @@ export default {
 .weather h1, .weather h2, .weather h3 {
   color: #2c3e50;
   text-decoration: none;
+}
+hr {
+  width: 80%;
 }
 </style>
